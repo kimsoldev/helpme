@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Colorbox</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
+    ></script>
+    <style>
+      * {
+        align-items: center;
+      }
+
+      #container {
+        padding: 50px;
+        background-color: #fff;
+      }
+
+      .colorSquare {
+        box-shadow: 0px 0px 25px 0px #333;
+        width: 242px;
+        height: 242px;
+        margin-bottom: 15px;
+      }
+
+      .colorArea input {
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+      }
+
+      .colorArea button {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+        background-color: #666;
+        color: #fff;
+        border: 2px solid #666;
+      }
+
+      .colorArea button:hover {
+        background-color: #111;
+        border-color: #111;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script type="text/babel">
+      // react는 dom에서의 최종 html엘리멘트와 jsx사이를 연결해주는 레퍼런스ref라고 하는 것을 제공한다.
+      class Colorizer extends React.Component {
+        constructor(props, context) {
+          super(props, context);
+
+          this.state = { color: "", bgColor: "white" };
+
+          this.colorValue = this.colorValue.bind(this);
+          this.setNewColor = this.handle.Submit.bind(this);
+        }
+        colorValue(event) {
+          this.setState({ color: event.target.value });
+        }
+        setNewColor(event) {
+          alert("your color was submitted:" + this.state.color);
+          this.setState({
+            bgColor: this.state.color,
+          });
+          event.preventDefalut();
+        }
+
+        render() {
+          var squareStyle = {
+            backgroundcolor: this.state.bgColor,
+          };
+
+          var self = this;
+
+          return (
+            <div className="colorArea">
+              <h1>e</h1>
+              <div style={squareStyle} className="colorSquare"></div>
+              <form onSubmit={this.setNewColor}>
+                <input
+                  onChange={this.colorValue}
+                  placeholder="Enter a color value"
+                ></input>
+                <button type="submit">go</button>
+              </form>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Colorizer />, document.getElementById("container"));
+    </script>
+  </body>
+</html>
